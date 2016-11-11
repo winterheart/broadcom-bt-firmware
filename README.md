@@ -29,6 +29,11 @@ Bluetooth: hci1: Broadcom Bluetooth Device
 
 Congratulations, now your bluetooth device successfully loaded. Now go to Bluez for futher configuration.
 
+## License
+
+Firmware files are licensed under [Broadcom WIDCOMM Bluetooth Software License Agreement](LICENSE.broadcom_bcm20702).
+Other parts of project are licensed under standard [MIT license](LICENSE.MIT.txt).
+
 ## Supported devices
 
-See DEVICES.md file.
+See [DEVICES file](DEVICES.md).
