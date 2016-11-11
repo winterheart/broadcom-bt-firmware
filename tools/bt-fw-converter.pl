@@ -34,6 +34,7 @@ use Getopt::Long;
 use File::Basename;
 use File::Path;
 use Pod::Usage;
+#use Data::Dumper;
 
 my $parser = qr{
 	<nocontext:>
@@ -86,7 +87,7 @@ $inf_file =~ s/\cM//g;
 
 my $parsed;
 
-if($inf_file =~ $parser) {
+if ($inf_file =~ $parser) {
 	$parsed = \%/;
 } else {
 	die "Can't parse file\n" . @!;
@@ -96,12 +97,12 @@ if($inf_file =~ $parser) {
 sub find_section {
 	my @inf = @{ shift() };
 	my $section_name = shift();
-
 	foreach my $name (@inf) {
 		if ($$name{Section}{SectionDeclaration}{SectionName} eq $section_name) {
 			return $name;
 		}
 	}
+	return 0;
 }
 
 sub find_value {
@@ -120,14 +121,12 @@ sub find_value {
 }
 
 my $inf_content = $$parsed{'InfFile'}{'Element'};
-
 my $section = find_section($inf_content, 'Version');
-my @versions = find_value($section, 'DriverVer');
 
+my @versions = find_value($section, 'DriverVer');
 my (undef, $version) = split(',', $versions[0]);
 
 $section = find_section($inf_content, 'Broadcom.NTamd64.10.0');
-
 my %devices;
 
 # Initial information
@@ -146,7 +145,7 @@ foreach my $name ($$section{Section}{SectionContent}) {
 
 # Find HEX files from sections
 foreach my $device (keys %devices) {
-	$section = find_section($inf_content, "$device.NTamd64");
+	$section = find_section($inf_content, "$device.NT");
 	my @copyfiles = find_value($section, "CopyFiles");
 	foreach my $copy (@copyfiles) {
 		$section = find_section($inf_content, $copy);
