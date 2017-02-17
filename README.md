@@ -1,7 +1,7 @@
 # Broadcom Bluetooth firmware for Linux kernel
 
 ## Overview
-This package intentended to provide firmware of Broadcom WIDCOMM® Bluetooth devices (including BCM20702, BCM20703, BCM43142 chipsets and other) for Linux kernel. This firmware comes from official driver package, which can be [downloaded here](http://www.broadcom.com/support/bluetooth).
+This package intentended to provide firmware of Broadcom WIDCOMM® Bluetooth devices (including BCM20702, BCM20703, BCM43142 chipsets and other) for Linux kernel. Since Febriary 2017, Broadcom ships they drivers directly to Windows Update service. They can be [downloaded here](http://www.catalog.update.microsoft.com/Search.aspx?q=Broadcom+bluetooth).
 
 ## Detection and Installation
 
