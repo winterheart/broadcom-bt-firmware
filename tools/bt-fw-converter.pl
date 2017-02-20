@@ -56,9 +56,6 @@ my $output = ".";
 my $help = 0;
 my $device_list;
 
-# Internal variables
-my @os_sections = ("Broadcom.NTamd64.10.0", "Broadcom64Only.NTamd64.10.0");
-
 GetOptions ("inf_file|f=s"	=> \$filename,
 	"hex2hcd=s"		=> \$hex2hcd,
 	"output|o=s"		=> \$output,
@@ -133,24 +130,42 @@ my @versions = find_value($section, 'DriverVer');
 my (undef, $version) = split(',', $versions[0]);
 say("Version is $version.");
 
+$section = find_section($inf_content, 'Manufacturer');
+
+my @names = ('%MfgName%', '%MfgName64%');
+my @os_sections;
+
+foreach my $name (@names) {
+	my @manufacturer = find_value($section, $name);
+	foreach my $i (@manufacturer) {
+		my @strings = split(',', $i);
+		# trim leading and trailing spaces
+		foreach my $i (@strings) {
+			$i =~ s/^\s+|\s+$//g;
+		}
+		for my $i (1..$#strings) {
+			push(@os_sections, "$strings[0].$strings[$i]");
+		}
+	}
+}
+
 my %devices;
 
 foreach my $os_section (@os_sections) {
 	$section = find_section($inf_content, $os_section);
 	if ($section == 0) {
-		say("There no '$os_section' section");
+		say("There no [$os_section] section");
 		next;
 	}
 
-
 # Initial information
-	say("Getting general information in section $os_section");
+	say("Getting general information in section [$os_section]");
 	foreach my $name ($$section{Section}{SectionContent}) {
 		foreach my $i (@$name) {
 			if ($$i{Parameter}) {
 	#			print "$$i{Parameter} -- $$i{Value}\n";
 				my ($device_name, $device_id) = split(',', $$i{Value});
-				$device_id =~ /USB\\VID_([0-9a-fA-F]{4})&PID_([0-9a-fA-F]{4})/;
+				$device_id =~ /USB\\[Vv][Ii][Dd]_([0-9a-fA-F]{4})&[Pp][Ii][Dd]_([0-9a-fA-F]{4})/;
 				$devices{$device_name}{VID} = lc($1);
 				$devices{$device_name}{PID} = lc($2);
 				if ($$i{Comment}[0]) {
@@ -191,7 +206,9 @@ if (! -d $output) {
 }
 
 foreach my $device (keys %devices) {
-	system($hex2hcd, "$base_path/$devices{$device}{hex}" , "-o", "$output/$devices{$device}{hcd}");
+	if($devices{$device}{hex}) {
+		system($hex2hcd, "$base_path/$devices{$device}{hex}" , "-o", "$output/$devices{$device}{hcd}");
+	}
 }
 
 # Generate list of supported devices 
@@ -206,7 +223,9 @@ if ($device_list) {
 	my @sorted = sort { "$devices{$a}{VID}:$devices{$a}{PID}" cmp "$devices{$b}{VID}:$devices{$b}{PID}" } keys %devices;
 
 	foreach my $i (@sorted) {
-		print($DEV_FILE "| $devices{$i}{VID}:$devices{$i}{PID} | $devices{$i}{hcd} | $devices{$i}{comment} |\n");
+		if ($devices{$i}{hcd}) {
+			print($DEV_FILE "| $devices{$i}{VID}:$devices{$i}{PID} | $devices{$i}{hcd} | $devices{$i}{comment} |\n");
+		}
 	}
 
 	close($DEV_FILE);
