@@ -39,7 +39,7 @@ for futher configuration.
 
 There may be incorrect naming between presented firmware name and name
 requested from Linux kernel. For example, system may request `BCM4354A2-13d3-3485.hcd`
-but actually this is `BCM435**6**A2-13d3-3485.hcd`. This is happens because
+but actually this is `BCM4356A2-13d3-3485.hcd`. This is happens because
 incorrect naming in Linux kernel. Just rename file to name that need to
 kernel. Here quick naming convertion:
 
@@ -57,8 +57,8 @@ Bluetooth will not initialize and [will not work properly](https://github.com/wi
 Firmware for WiFi already included to kernel, but you may need to do additional
 work to [place correct NVRAM](https://wireless.wiki.kernel.org/en/users/drivers/brcm80211#broadcom_brcmfmac_driver).
 
-Here example how it can looks (note about `brcm/brcmfmac4356-pcie.txt` loading
-- this is your customized NVRAM):
+Here example how it can looks (note about `brcm/brcmfmac4356-pcie.txt` 
+loading - this is your customized NVRAM):
 
 ```
 usbcore: registered new interface driver brcmfmac
