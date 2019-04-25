@@ -21,8 +21,8 @@ Bluetooth: hci1: BCM: Patch brcm/BCM20702A1-0b05-17cb.hcd not found
 
 As you can see, you need `brcm/BCM20702A1-0b05-17cb.hcd` firmware.
 
-Place required `.hcd` file to `/lib/firmware/brcm`. After inserting Broadcom
-Bluetooth device you will see that firmware successfully loaded:
+Place required `.hcd` file to `/lib/firmware/brcm` and reboot your computer. After reboot
+you will see that firmware successfully loaded:
 
 ```
 Bluetooth: hci1: BCM: chip id 63
