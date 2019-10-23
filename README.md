@@ -21,7 +21,8 @@ Bluetooth: hci1: BCM: Patch brcm/BCM20702A1-0b05-17cb.hcd not found
 
 As you can see, you need `brcm/BCM20702A1-0b05-17cb.hcd` firmware.
 
-Place required `.hcd` file to `/lib/firmware/brcm` and reboot your computer. After reboot
+Place required `.hcd` file to `/lib/firmware/brcm`,rename it to BCM.hcd and reboot your computer. After reboot
+Example cp BCM20702A1-0b05-17cbh.hcd /lib/firmware/brcm/BCM.hcd
 you will see that firmware successfully loaded:
 
 ```
