@@ -9,7 +9,16 @@ Update service. They can be [downloaded here](http://www.catalog.update.microsof
 ## Detection and Installation
 
 When you inserting Broadcom Bluetooth device you prefered Linux distribution
-may not load it properly:
+may not load it properly. 
+
+You may list all Bluetooth devices like this:
+
+```
+dmesg | grep -i bluetooth # Shows all Bluetooth driver info
+dmesg | grep -i bluetooth | grep -i firmware # Shows Bluetooth firmware issues
+```
+
+The output may look like this:
 
 ```
 Bluetooth: hci1: BCM: chip id 63
