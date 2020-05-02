@@ -145,6 +145,7 @@ foreach my $name (@names) {
 		}
 		for my $i (1..$#strings) {
 			push(@os_sections, "$strings[0].$strings[$i]");
+			push(@os_sections, "$strings[0]64Only.$strings[$i]");
 		}
 	}
 }
