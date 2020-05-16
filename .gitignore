@@ -1,2 +1,3 @@
 source/[^.nodelete]
 source/*
+build
