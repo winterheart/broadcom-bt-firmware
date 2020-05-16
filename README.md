@@ -1,3 +1,5 @@
+[![Packaging status](https://repology.org/badge/tiny-repos/broadcom-bt-firmware.svg)](https://repology.org/project/broadcom-bt-firmware/versions)
+
 # Broadcom Bluetooth firmware for Linux kernel
 
 ## Overview
