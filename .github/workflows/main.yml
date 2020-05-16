@@ -2,16 +2,16 @@ name: build
 
 on:
   push:
-#    tags:
-#    - '*'
+    tags:
+    - '*v'
 
 jobs:
   build:
-    name: Build packages
+    name: Build and upload packages
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
           sudo apt-get install rpm
@@ -20,4 +20,15 @@ jobs:
           mkdir build && cd build
           cmake ..
           cpack
+      - name: Create release and upload assets
+        run: |
+          set -x
+          assets=()
+          for asset in ./build/*.deb ./build/*.rpm ; do
+            assets+=("-a" "$asset")
+          done
+          tag_name="${GITHUB_REF##*/}"
+          hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
