@@ -1,0 +1,23 @@
+name: build
+
+on:
+  push:
+#    tags:
+#    - '*'
+
+jobs:
+  build:
+    name: Build packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: |
+          sudo apt-get install rpm
+      - name: Create packages
+        run: |
+          mkdir build && cd build
+          cmake ..
+          cpack
+
