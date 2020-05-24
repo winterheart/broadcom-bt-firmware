@@ -8,6 +8,10 @@ devices (including BCM20702, BCM20703, BCM43142 chipsets and other) for Linux
 kernel. Since February 2017, Broadcom ships their drivers directly to Windows
 Update service. They can be [downloaded here](http://www.catalog.update.microsoft.com/Search.aspx?q=Broadcom+bluetooth).
 
+## Security considerations
+
+Recently several vulnerabilities have been discovered in the Bluetooth stack such as [CVE-2018-5383](https://www.kb.cert.org/vuls/id/304725/), [CVE-2019-9506](https://www.kb.cert.org/vuls/id/918987/) (KNOB), [CVE-2020-10135](https://www.kb.cert.org/vuls/id/647177/) (BIAS) and more. Since Broadcom has stopped active support for its consumer devices, your system may be subject to security risks. You will have to use these devices **at your own risk**. As a repository maintainer, I cannot provide security fixes.
+
 ## Installation
 
 Check your Linux distribution [repositories](https://repology.org/project/broadcom-bt-firmware/versions).
