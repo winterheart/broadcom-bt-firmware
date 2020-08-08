@@ -64,9 +64,9 @@ but actually this is `BCM4356A2-13d3-3485.hcd`. This is happens because
 incorrect naming in Linux kernel. Just rename file to name that need to
 kernel. Here quick naming convertion:
 
-| Original name | Requested by Linux |
-|---------------|--------------------|
-| BCM4356A2     | BCM4354A2          |
+| Original name | Requested by Linux | Notes                     |
+|---------------|--------------------|---------------------------|
+| BCM4356A2     | BCM4354A2          | Fixed in Linux kernel 5.8 |
 
 ## Notes about combined WiFi+Bluetooth devices
 
