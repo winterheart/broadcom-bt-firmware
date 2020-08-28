@@ -7,6 +7,7 @@ project(broadcom-bt-firmware
 )
 
 set(CMAKE_INSTALL_PREFIX /)
+set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/lib;/lib/firmware")
 install(DIRECTORY brcm DESTINATION lib/firmware FILES_MATCHING PATTERN "*.hcd")
 install(FILES DEVICES.md README.md LICENSE.broadcom_bcm20702 LICENSE.MIT.txt
 	DESTINATION usr/share/doc/${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION})
