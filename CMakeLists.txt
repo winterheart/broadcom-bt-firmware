@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project(broadcom-bt-firmware
-	VERSION 10.1.0.1115
+	VERSION 12.0.1.1105
 	DESCRIPTION "Firmware for Broadcom Bluetooth devices"
 	HOMEPAGE_URL "https://github.com/winterheart/broadcom-bt-firmware"
 	LANGUAGES NONE
